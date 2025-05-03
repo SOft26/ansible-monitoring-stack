@@ -1,0 +1,20 @@
+---
+- name: Setup Prometheus, Grafana, Node Exporter, and Alertmanager on Linux
+  hosts: all
+  become: true
+  tasks:
+    - name: Include Prometheus role
+      include_role:
+        name: prometheus
+
+    - name: Include Grafana role
+      include_role:
+        name: grafana
+
+    - name: Include Node Exporter role
+      include_role:
+        name: node_exporter
+
+    - name: Include Alertmanager role
+      include_role:
+        name: alertmanager

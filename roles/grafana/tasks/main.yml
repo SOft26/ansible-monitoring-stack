@@ -1,0 +1,20 @@
+- name: Create grafana user
+  user:
+    name: grafana
+    shell: /sbin/nologin
+
+- name: Install Grafana
+  get_url:
+    url: "https://dl.grafana.com/oss/release/grafana_{{ grafana_version }}_amd64.deb"
+    dest: /tmp/grafana.deb
+
+- name: Install Grafana .deb package
+  apt:
+    deb: /tmp/grafana.deb
+    state: present
+
+- name: Enable and start Grafana service
+  systemd:
+    name: grafana-server
+    enabled: yes
+    state: started
